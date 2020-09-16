@@ -1,11 +1,11 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Platform, StatusBar} from 'react-native';
 
 import Animated from 'react-native-reanimated';
 
-export const Header  = ({scrollY}) => {
-    const HEADER_HEIGHT = 70;
-    const headerY = new Animated.interpolate(scrollY,{
+export const Header  = ({scrollY, diffClampScrollY}) => {
+    const HEADER_HEIGHT = Platform.OS === 'ios'? 155 : 70+ StatusBar.currentHeight;
+    const headerY = new Animated.interpolate(diffClampScrollY,{
         inputRange:[0, HEADER_HEIGHT],
         outputRange:[0, -HEADER_HEIGHT]
     });
